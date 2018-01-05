@@ -114,6 +114,9 @@
         else if ([self isKindOfClass:[UIButton class]]) {//UIButton 使用 button 的 text 和 image
             labelStr = [NSString stringWithFormat:@"(%@%@)",((UIButton *)self).titleLabel.text?:@"",((UIButton *)self).imageView.image.accessibilityIdentifier?:@""];
         }
+        else if ([self isKindOfClass:[UISwitch class]]) {//UISwitch 使用 UISwitch+tag
+            labelStr = [NSString stringWithFormat:@"(UISwitch%ld)",(long)((UISwitch *)self).tag];
+        }
         else if (accessibilityIdentifier) {// 已有 label，则在此基础上再次添加更多信息
             labelStr = [NSString stringWithFormat:@"(%@)",accessibilityIdentifier];
         }
