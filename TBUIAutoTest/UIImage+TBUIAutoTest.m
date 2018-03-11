@@ -15,7 +15,7 @@
 {
     
 #if DEBUG
-    BOOL isAutoTestUI = NO;
+    BOOL isAutoTestUI = YES;
     
 #if (TARGET_IPHONE_SIMULATOR)
     // 为保证不影响其它开发，在模拟器情况下只能自己手动打开这个自动化选项

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name         = "TBUIAutoTest"
-s.version      = "1.1.2"
+s.version      = "1.1.2.2"
 s.summary      = "Generating accessibilityIdentifier for UIAutomation."
 s.description  = <<-DESC
 TBUIAutoTest generates UIAutomation `accessibilityIdentifier` for you.
@@ -9,8 +9,8 @@ s.homepage     = "https://github.com/yulingtianxia/TBUIAutoTest"
 
 s.license = { :type => 'MIT', :file => 'LICENSE' }
 s.author       = { "YangXiaoyu" => "yulingtianxia@gmail.com" }
-s.social_media_url = 'https://twitter.com/yulingtianxia'
-s.source       = { :git => "https://github.com/yulingtianxia/TBUIAutoTest.git", :tag => s.version.to_s }
+#s.source           = { :http => "http://localhost:8080" }
+s.source       = { :git => "https://github.com/Frozenaria/TBUIAutoTest", :tag => s.version.to_s }
 
 s.platform     = :ios, '7.0'
 s.requires_arc = true
