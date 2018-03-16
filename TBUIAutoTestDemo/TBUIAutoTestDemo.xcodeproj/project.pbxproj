@@ -225,7 +225,7 @@
 				TargetAttributes = {
 					A477FDC61DD07657000F8482 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = D3RCVUP6VH;
+						DevelopmentTeam = A24G3636PC;
 						ProvisioningStyle = Automatic;
 					};
 					A4FA50541E751F4F0086DF0F = {
@@ -424,10 +424,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = D3RCVUP6VH;
+				DEVELOPMENT_TEAM = A24G3636PC;
 				INFOPLIST_FILE = TBUIAutoTestDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yulingtianxia.TBUIAutoTestDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.111.TBUIAutoTestDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -436,10 +436,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = D3RCVUP6VH;
+				DEVELOPMENT_TEAM = A24G3636PC;
 				INFOPLIST_FILE = TBUIAutoTestDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.yulingtianxia.TBUIAutoTestDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.111.TBUIAutoTestDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -520,6 +520,7 @@
 				A4FA505F1E751F4F0086DF0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
