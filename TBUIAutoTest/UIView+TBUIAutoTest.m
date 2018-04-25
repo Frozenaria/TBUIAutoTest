@@ -45,29 +45,6 @@
 //#endif
 }
 
-+ (void)swizzleSelector:(SEL)originalSelector withAnotherSelector:(SEL)swizzledSelector
-{
-    Class aClass = [self class];
-    
-    Method originalMethod = class_getInstanceMethod(aClass, originalSelector);
-    Method swizzledMethod = class_getInstanceMethod(aClass, swizzledSelector);
-    
-    BOOL didAddMethod =
-    class_addMethod(aClass,
-                    originalSelector,
-                    method_getImplementation(swizzledMethod),
-                    method_getTypeEncoding(swizzledMethod));
-    
-    if (didAddMethod) {
-        class_replaceMethod(aClass,
-                            swizzledSelector,
-                            method_getImplementation(originalMethod),
-                            method_getTypeEncoding(originalMethod));
-    } else {
-        method_exchangeImplementations(originalMethod, swizzledMethod);
-    }
-}
-
 - (void)longPress:(UILongPressGestureRecognizer *)recognizer
 {
     if (recognizer.state == UIGestureRecognizerStateEnded) {
@@ -153,9 +130,13 @@
         return;
     }
     [self tb_addSubview:view];
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:view action:@selector(longPress:)];
-    longPress.delegate = [TBUIAutoTest sharedInstance];
-    [view addGestureRecognizer:longPress];
+    UILongPressGestureRecognizer *longPress = objc_getAssociatedObject(view, _cmd);
+    if (!longPress) {
+        longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:view action:@selector(longPress:)];
+        longPress.delegate = [TBUIAutoTest sharedInstance];
+        [view addGestureRecognizer:longPress];
+        objc_setAssociatedObject(view, _cmd, longPress, OBJC_ASSOCIATION_RETAIN);
+    }
 }
 
 - (UIViewController*)viewController {

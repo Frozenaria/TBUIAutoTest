@@ -29,28 +29,9 @@
     {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            Class aClass = object_getClass((id)self);
-            
-            SEL originalSelector = @selector(imageNamed:);
-            SEL swizzledSelector = @selector(tb_imageNamed:);
-            
-            Method originalMethod = class_getClassMethod(aClass, originalSelector);
-            Method swizzledMethod = class_getClassMethod(aClass, swizzledSelector);
-            
-            BOOL didAddMethod =
-            class_addMethod(aClass,
-                            originalSelector,
-                            method_getImplementation(swizzledMethod),
-                            method_getTypeEncoding(swizzledMethod));
-            
-            if (didAddMethod) {
-                class_replaceMethod(aClass,
-                                    swizzledSelector,
-                                    method_getImplementation(originalMethod),
-                                    method_getTypeEncoding(originalMethod));
-            } else {
-                method_exchangeImplementations(originalMethod, swizzledMethod);
-            }
+            [object_getClass(self) swizzleSelector:@selector(imageNamed:) withAnotherSelector:@selector(tb_imageNamed:)];
+            [object_getClass(self) swizzleSelector:@selector(imageWithContentsOfFile:) withAnotherSelector:@selector(tb_imageWithContentsOfFile:)];
+            [self swizzleSelector:@selector(accessibilityIdentifier) withAnotherSelector:@selector(tb_accessibilityIdentifier)];
         });
     }
     
@@ -64,4 +45,30 @@
     image.accessibilityIdentifier = imageName;
     return image;
 }
+
++ (UIImage *)tb_imageWithContentsOfFile:(NSString *)path
+{
+    UIImage *image = [UIImage tb_imageWithContentsOfFile:path];
+    NSArray *components = [path pathComponents];
+    if (components.count > 0) {
+        image.accessibilityIdentifier = components.lastObject;
+    }
+    else {
+        image.accessibilityIdentifier = path;
+    }
+    return image;
+}
+
+- (id)assetName {return nil;}
+
+- (NSString *)tb_accessibilityIdentifier {
+    NSString *tb_accessibilityIdentifier = [self tb_accessibilityIdentifier];
+    if (tb_accessibilityIdentifier.length == 0 && [self respondsToSelector:@selector(imageAsset)]) {
+        tb_accessibilityIdentifier = [(id)self.imageAsset assetName];
+        self.accessibilityIdentifier = tb_accessibilityIdentifier;
+    }
+    
+    return tb_accessibilityIdentifier;
+}
+
 @end

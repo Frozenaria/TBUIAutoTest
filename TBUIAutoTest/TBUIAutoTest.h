@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-static NSString * const kAutoTestUIKey = @"isAutoTestUI";
+
+extern NSString * const kAutoTestUIKey;
 
 @interface TBUIAutoTest : NSObject <UIGestureRecognizerDelegate>
 
@@ -15,3 +16,10 @@ static NSString * const kAutoTestUIKey = @"isAutoTestUI";
 + (instancetype)sharedInstance;
 
 @end
+
+@interface NSObject (TBUIAutoTest)
+
++ (void)swizzleSelector:(SEL)originalSelector withAnotherSelector:(SEL)swizzledSelector;
+
+@end
+
